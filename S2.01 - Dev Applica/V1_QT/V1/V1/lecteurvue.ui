@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LecteurVue</class>
+ <widget class="QMainWindow" name="LecteurVue">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>550</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>LecteurVue</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menutets">
+    <property name="title">
+     <string>&amp;Fichier</string>
+    </property>
+    <widget class="QMenu" name="menu_Param_tre">
+     <property name="title">
+      <string>&amp;Paramètre</string>
+     </property>
+     <addaction name="action_Charger_diaporama"/>
+     <addaction name="action_Vitesse_de_d_filement"/>
+     <addaction name="action_Enlever_diaporama"/>
+    </widget>
+    <addaction name="actionQuitter"/>
+    <addaction name="menu_Param_tre"/>
+   </widget>
+   <widget class="QMenu" name="menuAide">
+    <property name="title">
+     <string>&amp;Aide</string>
+    </property>
+    <addaction name="action_A_propos_de"/>
+   </widget>
+   <addaction name="menutets"/>
+   <addaction name="menuAide"/>
+  </widget>
+  <action name="action_A_propos_de">
+   <property name="text">
+    <string> A &amp;propos de…</string>
+   </property>
+  </action>
+  <action name="actionQuitter">
+   <property name="text">
+    <string>&amp;Quitter</string>
+   </property>
+  </action>
+  <action name="action_Charger_diaporama">
+   <property name="text">
+    <string>&amp;Charger diaporama</string>
+   </property>
+  </action>
+  <action name="action_Vitesse_de_d_filement">
+   <property name="text">
+    <string>&amp;Vitesse de défilement</string>
+   </property>
+  </action>
+  <action name="action_Enlever_diaporama">
+   <property name="text">
+    <string>&amp;Enlever diaporama</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
