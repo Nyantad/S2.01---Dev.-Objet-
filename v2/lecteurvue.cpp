@@ -1,11 +1,17 @@
 #include "lecteurvue.h"
 #include "ui_lecteurvue.h"
+
+#include "lecteur.h"
+
 #include <QPixmap>
 #include <QDebug>
+
 lecteurvue::lecteurvue(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::lecteurvue)
 {
+
+    Lecteur monLecteur;
     QString lien = "F:/Documents/S2.01/v1/cartesDisney/Disney_0.gif"; // chemin absolu de l'image
     QPixmap carte(lien); // ouverture de l'image en QPixmap
     ui->setupUi(this);
