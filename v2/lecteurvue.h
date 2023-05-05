@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "lecteur.h"
+#include "apropos.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class lecteurvue; }
@@ -29,10 +30,11 @@ public slots:
     void charger();
     void enlever();
     void vitesse();
-    void aPropos();
+    void aProposDe();
 
 private:
     Ui::lecteurvue *ui;
+    aPropos *aProposDlg;
     Lecteur monLecteur;
 };
 #endif // LECTEURVUE_H

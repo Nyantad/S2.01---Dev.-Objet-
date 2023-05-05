@@ -1,4 +1,5 @@
 #include "lecteurvue.h"
+#include "apropos.h"
 #include "ui_lecteurvue.h"
 
 #include <QPixmap>
@@ -28,7 +29,7 @@ lecteurvue::lecteurvue(QWidget *parent)
     connect(ui->actionCharger_diaporama, SIGNAL(triggered()), this, SLOT(charger()));
     connect(ui->actionEnlever_diaporama, SIGNAL(triggered()), this, SLOT(enlever()));
     connect(ui->actionVitesse_de_defilement, SIGNAL(triggered()), this, SLOT(vitesse()));
-    connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(aPropos()));
+    connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(aProposDe()));
 }
 
 lecteurvue::~lecteurvue()
@@ -97,7 +98,9 @@ void lecteurvue::vitesse() {
 }
 
 // définition du slot pour afficher le dialog a propos de...
-void lecteurvue::aPropos() {
+void lecteurvue::aProposDe() {
     qDebug() << "a propos de";
+    aPropos aProposDlg(this);
+    aProposDlg.exec();
 }
 

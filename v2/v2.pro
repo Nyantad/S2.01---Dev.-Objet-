@@ -9,18 +9,21 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    apropos.cpp \
     image.cpp \
     lecteur.cpp \
     lecteurvue.cpp \
     main.cpp \
 
 HEADERS += \
+    apropos.h \
     image.h \
     lecteur.h \
     lecteurvue.h \
     mainwindow.h
 
 FORMS += \
+    apropos.ui \
     lecteurvue.ui \
 
 # Default rules for deployment.
