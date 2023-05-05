@@ -9,11 +9,10 @@ lecteurvue::lecteurvue(QWidget *parent)
     , ui(new Ui::lecteurvue)
 {
     monLecteur.changerDiaporama(1);
-
-    QString lien = "F:/Documents/S2.01/v1/cartesDisney/Disney_0.gif"; // chemin absolu de l'image
-    QPixmap carte(lien); // ouverture de l'image en QPixmap
     ui->setupUi(this);
-    ui->lbImage->setPixmap(carte); // ajout de l'image au label
+    QString lien = QString::fromStdString(monLecteur.imageCourante()->getChemin()); // transformation d'un string en QString
+    QPixmap image(lien);
+    ui->lbImage->setPixmap(image); // ajout de l'image au label
     ui->statusbar->showMessage(lien); // affichage du chemin dans la statusbar
 
     // connexion des boutons avec les slots appropriés
@@ -25,7 +24,7 @@ lecteurvue::lecteurvue(QWidget *parent)
     connect(ui->bAuto, SIGNAL(clicked()), this, SLOT(modeAuto()));
 
     // connexion des items avec les slots appropriés
-    connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(quitter()));
+    connect(ui->actionQuitter, SIGNAL(triggered()), QCoreApplication::instance(), SLOT(quit()));
     connect(ui->actionCharger_diaporama, SIGNAL(triggered()), this, SLOT(charger()));
     connect(ui->actionEnlever_diaporama, SIGNAL(triggered()), this, SLOT(enlever()));
     connect(ui->actionVitesse_de_defilement, SIGNAL(triggered()), this, SLOT(vitesse()));
@@ -52,7 +51,7 @@ void lecteurvue::precedent() {
     qDebug() << "precedent";
     monLecteur.reculer();
     QString lien = QString::fromStdString(monLecteur.imageCourante()->getChemin()); // transformation d'un string en QString
-    QPixmap image(lien); // création d'une QPixmap à partir du lien de l'image
+    QPixmap image(lien);
     ui->lbImage->setPixmap(image); // ajout de l'image au label
     ui->statusbar->showMessage(lien); // affichage du chemin dans la statusbar
 }
