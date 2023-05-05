@@ -1,8 +1,6 @@
 #include "lecteurvue.h"
 #include "ui_lecteurvue.h"
 
-#include "lecteur.h"
-
 #include <QPixmap>
 #include <QDebug>
 
@@ -10,8 +8,8 @@ lecteurvue::lecteurvue(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::lecteurvue)
 {
+    monLecteur.changerDiaporama(1);
 
-    Lecteur monLecteur;
     QString lien = "F:/Documents/S2.01/v1/cartesDisney/Disney_0.gif"; // chemin absolu de l'image
     QPixmap carte(lien); // ouverture de l'image en QPixmap
     ui->setupUi(this);
@@ -41,7 +39,7 @@ lecteurvue::~lecteurvue()
 
 // définition du slot pour démarrer la diapositive
 void lecteurvue::lancer() {
-    qDebug() << "lancer";
+    qDebug() << "lancer";    
 }
 
 // définition du slot pour arrêter la diapositive
@@ -52,11 +50,21 @@ void lecteurvue::arreter() {
 // définition du slot pour revenir à la diapositive précédente
 void lecteurvue::precedent() {
     qDebug() << "precedent";
+    monLecteur.reculer();
+    QString lien = QString::fromStdString(monLecteur.imageCourante()->getChemin()); // transformation d'un string en QString
+    QPixmap image(lien); // création d'une QPixmap à partir du lien de l'image
+    ui->lbImage->setPixmap(image); // ajout de l'image au label
+    ui->statusbar->showMessage(lien); // affichage du chemin dans la statusbar
 }
 
 // définition du slot pour passer à la diapositive suivante
 void lecteurvue::suivant() {
     qDebug() << "suivant";
+    monLecteur.avancer();
+    QString lien = QString::fromStdString(monLecteur.imageCourante()->getChemin()); // transformation d'un string en QString
+    QPixmap image(lien); // création d'une QPixmap à partir du lien de l'image
+    ui->lbImage->setPixmap(image); // ajout de l'image au label
+    ui->statusbar->showMessage(lien); // affichage du chemin dans la statusbar
 }
 
 // définition du slot pour activer le mode manuel

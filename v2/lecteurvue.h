@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "lecteur.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class lecteurvue; }
 QT_END_NAMESPACE
@@ -31,5 +33,6 @@ public slots:
 
 private:
     Ui::lecteurvue *ui;
+    Lecteur monLecteur;
 };
 #endif // LECTEURVUE_H
