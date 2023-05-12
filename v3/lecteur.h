@@ -16,6 +16,7 @@ public:
     unsigned int nbImages();    // affiche la taille de _diaporama
     Image* imageCourante();     // retourne le pointeur vers l'image courante
     unsigned int numDiaporamaCourant();
+    void setImageCourante(int);
 
 private:
     unsigned _numDiaporamaCourant;   // numéro du diaporama courant, par défaut 0

@@ -9,12 +9,10 @@ lecteurvue::lecteurvue(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::lecteurvue)
 {
+    timer = new QTimer(this);
     monLecteur.changerDiaporama(1);
     ui->setupUi(this);
-    QString lien = QString::fromStdString(monLecteur.imageCourante()->getChemin()); // transformation d'un string en QString
-    QPixmap image(lien);
-    ui->lbImage->setPixmap(image); // ajout de l'image au label
-    ui->statusbar->showMessage(lien); // affichage du chemin dans la statusbar
+    setImage();
 
     // connexion des boutons avec les slots appropriés
     connect(ui->bLancer, SIGNAL(clicked()), this, SLOT(lancer()));
@@ -30,6 +28,8 @@ lecteurvue::lecteurvue(QWidget *parent)
     connect(ui->actionEnlever_diaporama, SIGNAL(triggered()), this, SLOT(enlever()));
     connect(ui->actionVitesse_de_defilement, SIGNAL(triggered()), this, SLOT(vitesse()));
     connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(aProposDe()));
+
+    connect(timer, SIGNAL(timeout()), this, SLOT(suivant()));
 }
 
 lecteurvue::~lecteurvue()
@@ -51,30 +51,36 @@ void lecteurvue::arreter() {
 void lecteurvue::precedent() {
     qDebug() << "precedent";
     monLecteur.reculer();
-    QString lien = QString::fromStdString(monLecteur.imageCourante()->getChemin()); // transformation d'un string en QString
-    QPixmap image(lien);
-    ui->lbImage->setPixmap(image); // ajout de l'image au label
-    ui->statusbar->showMessage(lien); // affichage du chemin dans la statusbar
+    setImage();
 }
 
 // définition du slot pour passer à la diapositive suivante
 void lecteurvue::suivant() {
     qDebug() << "suivant";
     monLecteur.avancer();
-    QString lien = QString::fromStdString(monLecteur.imageCourante()->getChemin()); // transformation d'un string en QString
-    QPixmap image(lien); // création d'une QPixmap à partir du lien de l'image
-    ui->lbImage->setPixmap(image); // ajout de l'image au label
-    ui->statusbar->showMessage(lien); // affichage du chemin dans la statusbar
+    setImage();
 }
 
 // définition du slot pour activer le mode manuel
 void lecteurvue::modeManuel() {
     qDebug() << "mode manuel";
+    ui->bSuivant->setDisabled(false);
+    ui->bPrecedent->setDisabled(false);
+    ui->bAuto->setDisabled(false);
+    ui->bManuel->setDisabled(true);
+    timer->stop();
 }
 
 // définition du slot pour activer le mode automatique
 void lecteurvue::modeAuto() {
     qDebug() << "mode automatique";
+    ui->bSuivant->setDisabled(true);
+    ui->bPrecedent->setDisabled(true);
+    ui->bAuto->setDisabled(true);
+    ui->bManuel->setDisabled(false);
+    monLecteur.setImageCourante(0);
+    setImage();
+    timer->start(2000);
 }
 
 // définition du slot pour démarrer la diapositive
@@ -104,3 +110,11 @@ void lecteurvue::aProposDe() {
     aProposDlg.exec();
 }
 
+// définition de la fonction pour mettre à jour l'image
+void lecteurvue::setImage()
+{
+    QString lien = QString::fromStdString(monLecteur.imageCourante()->getChemin()); // transformation d'un string en QString
+    QPixmap image(lien); // création d'une QPixmap à partir du lien de l'image
+    ui->lbImage->setPixmap(image); // ajout de l'image au label
+    ui->statusbar->showMessage(lien); // affichage du chemin dans la statusbar
+}

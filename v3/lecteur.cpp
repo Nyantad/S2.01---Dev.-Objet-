@@ -27,7 +27,6 @@ void Lecteur::changerDiaporama(unsigned int pNumDiaporama)
     {
         chargerDiaporama(); // charge le diaporama courant
     }
-
 }
 
 void Lecteur::chargerDiaporama()
@@ -45,7 +44,7 @@ void Lecteur::chargerDiaporama()
     imageACharger = new Image(1, "personne", "Grincheux", "F:/Documents/S2.01/S2.01-Dev.Objet/cartesDisney/Disney_3.gif");
     _diaporama.push_back(imageACharger);
 
-
+    // tri à bulles pour trier les images
     int n = _diaporama.size();
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
@@ -79,7 +78,6 @@ void Lecteur::viderDiaporama()
      _posImageCourante = 0;
     }
     cout << nbImages() << " images restantes dans le diaporama." << endl;
-
 }
 
 void Lecteur::afficher()
@@ -116,4 +114,9 @@ Image *Lecteur::imageCourante()
 unsigned int Lecteur::numDiaporamaCourant()
 {
     return _numDiaporamaCourant;
+}
+
+void Lecteur::setImageCourante(int image)
+{
+    _posImageCourante = image % nbImages();
 }

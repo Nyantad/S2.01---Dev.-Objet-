@@ -2,6 +2,7 @@
 #define LECTEURVUE_H
 
 #include <QMainWindow>
+#include <QTimer>
 
 #include "lecteur.h"
 #include "apropos.h"
@@ -36,5 +37,9 @@ private:
     Ui::lecteurvue *ui;
     aPropos *aProposDlg;
     Lecteur monLecteur;
+    QTimer *timer;
+
+private:
+    void setImage();
 };
 #endif // LECTEURVUE_H
