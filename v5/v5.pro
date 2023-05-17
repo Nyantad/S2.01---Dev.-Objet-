@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     apropos.cpp \
+    database.cpp \
     image.cpp \
     lecteur.cpp \
     lecteurvue.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     apropos.h \
+    database.h \
     image.h \
     lecteur.h \
     lecteurvue.h \
