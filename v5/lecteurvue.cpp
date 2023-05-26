@@ -1,10 +1,10 @@
 #include "lecteurvue.h"
-#include "apropos.h"
 #include "ui_lecteurvue.h"
 
 #include <QPixmap>
 #include <QDebug>
 #include <QInputDialog>
+#include <QTableView>
 
 lecteurvue::lecteurvue(QWidget *parent)
     : QMainWindow(parent)

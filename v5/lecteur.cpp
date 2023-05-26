@@ -1,4 +1,5 @@
 #include "lecteur.h"
+#include "database.h"
 
 Lecteur::Lecteur()
 {
@@ -34,15 +35,24 @@ void Lecteur::chargerDiaporama()
     /* Chargement des images associées au diaporama courant
        Dans une version ultérieure, ces données proviendront d'une base de données,
        et correspondront au diaporama choisi */
+    DataBase *db;
+    db = new DataBase;
+    db->openDataBase();
+
+    QSqlQuery query;
     Image* imageACharger;
-    imageACharger = new Image(3, "personne", "Blanche Neige", "F:/Documents/S2.01/S2.01-Dev.Objet/cartesDisney/Disney_2.gif");
-    _diaporama.push_back(imageACharger);
-    imageACharger = new Image(2, "personne", "Cendrillon", "F:/Documents/S2.01/S2.01-Dev.Objet/cartesDisney/Disney_4.gif");
-    _diaporama.push_back(imageACharger);
-    imageACharger = new Image(4, "animal", "Mickey", "F:/Documents/S2.01/S2.01-Dev.Objet/cartesDisney/Disney_1.gif");
-    _diaporama.push_back(imageACharger);
-    imageACharger = new Image(1, "personne", "Grincheux", "F:/Documents/S2.01/S2.01-Dev.Objet/cartesDisney/Disney_3.gif");
-    _diaporama.push_back(imageACharger);
+    if (query.exec("SELECT DD.rang, F.nomFamille, D.titrePhoto, D.uriPhoto FROM Diapos D JOIN DiaposDansDiaporama DD ON D.idphoto = DD.idDiapo JOIN Diaporamas Dia ON Dia.idDiaporama = DD.idDiaporama JOIN Familles F ON F.idFamille = D.idFam WHERE Dia.idDiaporama = 1;")) {
+               while (query.next()) {
+                   //ui->tableWidget->setItem(row,0, new QTableWidgetItem(query.value(1).toString()));
+                   imageACharger = new Image(query.value(0).toInt(),
+                                             query.value(1).toString().toStdString(),
+                                             query.value(2).toString().toStdString(),
+                                             ".." + query.value(3).toString().toStdString());
+                   _diaporama.push_back(imageACharger);
+               }
+       } else {
+               qDebug() << query.lastError().text();
+       }
 
     // tri à bulles pour trier les images
     int n = _diaporama.size();

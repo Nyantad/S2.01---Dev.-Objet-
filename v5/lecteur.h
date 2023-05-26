@@ -28,6 +28,7 @@ private:
 private:
     void chargerDiaporama();    // charge dans _diaporama les images du _numDiaporamaCourant
     void viderDiaporama();      // vide _diaporama de tous ses objets image et les delete
+
 };
 
 #endif // LECTEUR_H

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <QLabel>
+#include <QTableView>
 
 #include "lecteur.h"
 #include "apropos.h"
