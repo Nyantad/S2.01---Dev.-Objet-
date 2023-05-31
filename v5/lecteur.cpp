@@ -41,7 +41,7 @@ void Lecteur::chargerDiaporama()
 
     QSqlQuery query;
     Image* imageACharger;
-    if (query.exec("SELECT DD.rang, F.nomFamille, D.titrePhoto, D.uriPhoto FROM Diapos D JOIN DiaposDansDiaporama DD ON D.idphoto = DD.idDiapo JOIN Diaporamas Dia ON Dia.idDiaporama = DD.idDiaporama JOIN Familles F ON F.idFamille = D.idFam")) {
+    if (query.exec("SELECT D.idphoto, F.nomFamille, D.titrePhoto, D.uriPhoto FROM Diapos D JOIN DiaposDansDiaporama DD ON D.idphoto = DD.idDiapo JOIN Diaporamas Dia ON Dia.idDiaporama = DD.idDiaporama JOIN Familles F ON F.idFamille = D.idFam")) {
                while (query.next()) {
                    //ui->tableWidget->setItem(row,0, new QTableWidgetItem(query.value(1).toString()));
                    imageACharger = new Image(query.value(0).toInt(),
