@@ -100,6 +100,7 @@ void lecteurvue::charger() {
     QSqlQuery query("SELECT * FROM `Diaporamas` ORDER BY `Diaporamas`.`idDiaporama` ASC");
     while (query.next()) {
         QString value = query.value(1).toString();
+        qDebug() << value << Qt::endl;
         items << value;
     }
     db->closeDataBase();
