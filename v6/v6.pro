@@ -14,8 +14,7 @@ SOURCES += \
     image.cpp \
     lecteur.cpp \
     lecteurvue.cpp \
-    main.cpp \
-    table.cpp
+    main.cpp
 
 HEADERS += \
     apropos.h \
@@ -23,13 +22,11 @@ HEADERS += \
     image.h \
     lecteur.h \
     lecteurvue.h \
-    mainwindow.h \
-    table.h
+    mainwindow.h
 
 FORMS += \
     apropos.ui \
-    lecteurvue.ui \
-    table.ui
+    lecteurvue.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

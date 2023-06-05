@@ -11,6 +11,7 @@ lecteurvue::lecteurvue(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::lecteurvue)
 {
+    db = new DataBase();
     timer = new QTimer(this);
     monLecteur.changerDiaporama(0);
     ui->setupUi(this);
@@ -92,29 +93,35 @@ void lecteurvue::quitter() {
 // définition du slot pour charger la diapositive
 void lecteurvue::charger() {
     qDebug() << "charger";
-    DataBase *db;
-    db = new DataBase();
     db->openDataBase();
 
     QStringList items;
-    QSqlQuery query("SELECT * FROM `Diaporamas` ORDER BY `Diaporamas`.`idDiaporama` ASC");
+    QSqlQuery query;
+    query.exec("SELECT * FROM `Diaporamas` ORDER BY `Diaporamas`.`idDiaporama` ASC");
     while (query.next()) {
         QString value = query.value(1).toString();
         qDebug() << value << Qt::endl;
         items << value;
     }
-    db->closeDataBase();
-
     QString selected;
     QString item = QInputDialog::getItem(this, "Selection Diaporama", "Sélectionner un diaporama:", items, 0, false);
     if (!item.isEmpty()) {
         selected = item;
         int index = items.indexOf(selected) + 1;
         activerBouton(true);
-        qDebug() << index;
         monLecteur.changerDiaporama(index);
         setImage();
+        db->openDataBase();
+        // On modifie la vitesse de défilement
+        QSqlQuery query;
+        QString requete("SELECT * FROM `Diaporamas` WHERE idDiaporama = ?");
+        query.prepare(requete);
+        query.addBindValue(QString::number(index));
+        query.exec();
+        query.next();
+        s = query.value(2).toInt();
     }
+    db->closeDataBase();
 }
 
 // définition du slot pour enlever la diapositive

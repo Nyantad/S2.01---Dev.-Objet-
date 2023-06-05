@@ -8,6 +8,7 @@
 
 #include "lecteur.h"
 #include "apropos.h"
+#include "database.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class lecteurvue; }
@@ -42,6 +43,7 @@ private:
     QTimer *timer;
     QLabel status;
     string id;
+    DataBase *db;
     int s = 2;
 
 private:

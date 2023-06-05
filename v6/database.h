@@ -5,7 +5,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
-#define DATABASE_NAME "bd_nodenot"
+#define DATABASE_NAME "bd_sae"
 #define CONNECT_TYPE "QODBC"
 
 class DataBase
