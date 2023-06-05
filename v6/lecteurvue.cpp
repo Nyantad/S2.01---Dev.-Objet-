@@ -70,6 +70,7 @@ void lecteurvue::modeManuel() {
     ui->bPrecedent->setDisabled(false);
     ui->bAuto->setDisabled(false);
     ui->bManuel->setDisabled(true);
+    ui->actionEnlever_diaporama->setDisabled(false);
     timer->stop();
 }
 
@@ -80,6 +81,7 @@ void lecteurvue::modeAuto() {
     ui->bPrecedent->setDisabled(true);
     ui->bAuto->setDisabled(true);
     ui->bManuel->setDisabled(false);
+    ui->actionEnlever_diaporama->setDisabled(true);
     monLecteur.setImageCourante(0);
     setImage();
     timer->start(s*1000);
