@@ -129,6 +129,7 @@ void lecteurvue::setImage()
     statusBar()->addWidget(&status);
 }
 
+// définition de la méthode pour activer ou désactiver les boutons de l'interface utilisateur
 void lecteurvue::activerBouton(bool estActive)
 {
     ui->bSuivant->setEnabled(estActive);

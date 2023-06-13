@@ -7,11 +7,11 @@ class Image
 {
 public:
     Image(unsigned int pRang=0,
-              string pCategorie="", string pTitre="", string pChemin = "");
-    unsigned int getRang();
-    string getCategorie();
-    string getTitre();
-    string getChemin();
+          string pCategorie="", string pTitre="", string pChemin = "");
+    unsigned int getRang();    // Retourne le rang de l'image dans le diaporama
+    string getCategorie();     // Retourne la catégorie de l'image (personne, animal, objet)
+    string getTitre();         // Retourne le titre de l'image
+    string getChemin();        // Retourne le chemin d'accès de l'image
     void afficher();           // affiche tous les champs de l'image
 
 private:
