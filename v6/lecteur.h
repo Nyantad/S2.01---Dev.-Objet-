@@ -1,9 +1,7 @@
 #ifndef LECTEUR_H
 #define LECTEUR_H
 #include "image.h"
-#include <vector>
-
-typedef vector<Image*> Diaporama;   // Structure de données contenant les infos sur les images
+#include "diaporama.h"
 
 class Lecteur
 {
@@ -17,6 +15,7 @@ public:
     Image* imageCourante();     // retourne le pointeur vers l'image courante
     unsigned int numDiaporamaCourant();
     void setImageCourante(int);
+    Diaporama* diaporamaCourant;
 
 private:
     unsigned _numDiaporamaCourant;   // numéro du diaporama courant, par défaut 0

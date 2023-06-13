@@ -53,24 +53,13 @@ void Lecteur::chargerDiaporama(unsigned int pNumDiaporama)
                                              query.value(1).toString().toStdString(),
                                              query.value(2).toString().toStdString(),
                                              ".." + query.value(3).toString().toStdString());
-                   _diaporama.push_back(imageACharger);
+                   _diaporama._diaporama.push_back(imageACharger);
                }
        } else {
                qDebug() << "Lecteur.cpp" << query.lastError().text();
        }
     db->closeDataBase();
-    // tri à bulles pour trier les images
-    int n = _diaporama.size();
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (_diaporama[j]->getRang() > _diaporama[j+1]->getRang()) {
-                    // Échange de deux pointeurs d'images
-                    Image* temp = _diaporama[j];
-                    _diaporama[j] = _diaporama[j+1];
-                    _diaporama[j+1] = temp;
-                }
-            }
-        }
+    _diaporama.trier();
 	 
      _posImageCourante = 0;
 
@@ -86,7 +75,7 @@ void Lecteur::viderDiaporama()
         unsigned int taille = nbImages();
         for (unsigned int i = 0; i < taille ; i++)
         {
-            _diaporama.pop_back(); /* Removes the last element in the vector,
+            _diaporama.enleverImage(); /* Removes the last element in the vector,
                                       effectively reducing the container size by one.
                                       AND deletes the removed element */
         }
@@ -105,7 +94,7 @@ void Lecteur::afficher()
         cout << "Diaporama vide" << endl;
     } else {
         if (nbImages() > 0) {
-            _diaporama[_posImageCourante]->afficher();
+            //_diaporama[_posImageCourante]->afficher();
         } else {
             cout << "Diaporama vide";
         }
@@ -114,7 +103,7 @@ void Lecteur::afficher()
 
 unsigned int Lecteur::nbImages()
 {
-    return _diaporama.size();
+    return _diaporama.nbImages();
 }
 
 Image *Lecteur::imageCourante()
@@ -122,7 +111,7 @@ Image *Lecteur::imageCourante()
     if (numDiaporamaCourant() == 0 || nbImages() == 0) {
         return nullptr;
     } else {
-        return _diaporama[_posImageCourante];
+        return _diaporama.imageCourante(_posImageCourante);
     }
 }
 
