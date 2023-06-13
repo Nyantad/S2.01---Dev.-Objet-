@@ -8,15 +8,15 @@ typedef vector<Image*> Diaporama;   // Structure de données contenant les infos
 class Lecteur
 {
 public:
-    Lecteur();
+    Lecteur();                  // Constructeur de la classe Lecteur
     void avancer();             // incrémente _posImageCourante, modulo nbImages()
     void reculer();             // décrémente _posImageCourante, modulo nbImages()
     void changerDiaporama(unsigned int pNumDiaporama);    // permet de choisir un diaporama, 0 si aucun diaporama souhaité
     void afficher();            // affiche les informations sur lecteur-diaporama et image courante
     unsigned int nbImages();    // affiche la taille de _diaporama
     Image* imageCourante();     // retourne le pointeur vers l'image courante
-    unsigned int numDiaporamaCourant();
-    void setImageCourante(int);
+    unsigned int numDiaporamaCourant();  // Retourne le numéro du diaporama courant
+    void setImageCourante(int);  // Permet de définir l'image courante
 
 private:
     unsigned _numDiaporamaCourant;   // numéro du diaporama courant, par défaut 0
@@ -28,7 +28,6 @@ private:
 private:
     void chargerDiaporama();    // charge dans _diaporama les images du _numDiaporamaCourant
     void viderDiaporama();      // vide _diaporama de tous ses objets image et les delete
-
 };
 
 #endif // LECTEUR_H
