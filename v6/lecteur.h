@@ -6,16 +6,16 @@
 class Lecteur
 {
 public:
-    Lecteur();
+    Lecteur();                  // Constructeur de la classe Lecteur
     void avancer();             // incrémente _posImageCourante, modulo nbImages()
     void reculer();             // décrémente _posImageCourante, modulo nbImages()
     void changerDiaporama(unsigned int pNumDiaporama);    // permet de choisir un diaporama, 0 si aucun diaporama souhaité
     void afficher();            // affiche les informations sur lecteur-diaporama et image courante
     unsigned int nbImages();    // affiche la taille de _diaporama
     Image* imageCourante();     // retourne le pointeur vers l'image courante
-    unsigned int numDiaporamaCourant();
-    void setImageCourante(int);
-    Diaporama* diaporamaCourant;
+    unsigned int numDiaporamaCourant();  // Retourne le numéro du diaporama courant
+    void setImageCourante(int);  // Permet de définir l'image courante
+    Diaporama* diaporamaCourant; // Membre donnée représentant le diaporama courant
 
 private:
     unsigned _numDiaporamaCourant;   // numéro du diaporama courant, par défaut 0

@@ -1,21 +1,25 @@
 #include "lecteur.h"
 #include "database.h"
 
+// Constructeur de la classe Lecteur, initialise le numéro du diaporama courant à 0 (vide)
 Lecteur::Lecteur()
 {
     _numDiaporamaCourant = 0;   // =  le lecteur est vide
 }
 
+// Incrémente la position de l'image courante, modulo le nombre d'images
 void Lecteur::avancer()
 {
     _posImageCourante = (_posImageCourante + 1) % nbImages();
 }
 
+// Décrémente la position de l'image courante, modulo le nombre d'images
 void Lecteur::reculer()
 {
     _posImageCourante = (_posImageCourante - 1) % nbImages();
 }
 
+// Change le diaporama courant en fonction du numéro de diaporama passé en paramètre
 void Lecteur::changerDiaporama(unsigned int pNumDiaporama)
 {
     // s'il y a un diaporama courant, le vider, puis charger le nouveau Diaporama
@@ -30,6 +34,7 @@ void Lecteur::changerDiaporama(unsigned int pNumDiaporama)
     }
 }
 
+// Charge les images du diaporama courant
 void Lecteur::chargerDiaporama(unsigned int pNumDiaporama)
 {
     /* Chargement des images associées au diaporama courant
@@ -68,6 +73,7 @@ void Lecteur::chargerDiaporama(unsigned int pNumDiaporama)
 
 }
 
+// Vide le vecteur _diaporama et supprime les objets Image
 void Lecteur::viderDiaporama()
 {
     if (nbImages () > 0)
@@ -84,6 +90,7 @@ void Lecteur::viderDiaporama()
     cout << nbImages() << " images restantes dans le diaporama." << endl;
 }
 
+// Affiche les informations sur le diaporama courant
 void Lecteur::afficher()
 {
     /* affiche les information sur le lecteur :
@@ -106,6 +113,7 @@ unsigned int Lecteur::nbImages()
     return _diaporama.nbImages();
 }
 
+// Retourne l'image courante du diaporama
 Image *Lecteur::imageCourante()
 {
     if (numDiaporamaCourant() == 0 || nbImages() == 0) {
@@ -115,11 +123,13 @@ Image *Lecteur::imageCourante()
     }
 }
 
+// Retourne le numéro du diaporama courant
 unsigned int Lecteur::numDiaporamaCourant()
 {
     return _numDiaporamaCourant;
 }
 
+// Définit l'image courante en fonction de l'indice passé en paramètre
 void Lecteur::setImageCourante(int image)
 {
     _posImageCourante = image % nbImages();
